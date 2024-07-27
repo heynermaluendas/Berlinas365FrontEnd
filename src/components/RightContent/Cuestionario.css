@@ -1,0 +1,14 @@
+.resetButton {
+    color: black; /* Color de texto inicial */
+    transition: color 0.3s ease; /* Transición suave para el color de texto */
+  }
+  
+  .resetButton:hover {
+    color: #009944 !important; /* Color de texto verde al pasar el mouse */
+  }
+  
+  .resetButton.disabled {
+    color: #ccc; /* Cambia el color de texto cuando está deshabilitado */
+    pointer-events: none; /* Evita clics cuando está deshabilitado */
+  }
+  

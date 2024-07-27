@@ -1,0 +1,290 @@
+{
+  "siniestro": [
+    {
+      "id": "1",
+      "variable": "1.1",
+      "indicadores": "Fatalidades",
+      "fecha": "Enero - Marzo",
+      "valor": "19",
+      "dato": "Real"
+    },
+    {
+      "id": "2",
+      "variable": "1.2",
+      "indicadores": "Heridos graves",
+      "fecha": "Enero - Marzo",
+      "valor": "0",
+      "dato": "Real"
+    },
+    {
+      "id": "3",
+      "variable": "1.3",
+      "indicadores": "Heridos leves",
+      "fecha": "Enero - Marzo",
+      "valor": "2",
+      "dato": "Real"
+    },
+    {
+      "id": "4",
+      "variable": "1.4",
+      "indicadores": "Choques simples",
+      "fecha": "Enero - Marzo",
+      "valor": "20",
+      "dato": "Real"
+    },
+    {
+      "id": "5",
+      "variable": "1.5",
+      "indicadores": "Kilómetros recorridos",
+      "fecha": "Enero - Marzo",
+      "valor": "22103",
+      "dato": "Real"
+    },
+    {
+      "id": "6",
+      "variable": "2.1",
+      "indicadores": "Costos directos de fatalidades",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 23",
+      "dato": "Moneda"
+    },
+    {
+      "id": "7",
+      "variable": "2.2",
+      "indicadores": "Costos indirectos de fatalidades",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 0",
+      "dato": "Moneda"
+    },
+    {
+      "id": "8",
+      "variable": "2.3",
+      "indicadores": "Costos directos de heridos graves",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 2",
+      "dato": "Moneda"
+    },
+    {
+      "id": "9",
+      "variable": "2.4",
+      "indicadores": "Costos indirectos de heridos graves",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 0",
+      "dato": "Moneda"
+    },
+    {
+      "id": "10",
+      "variable": "2.5",
+      "indicadores": "Costos directos de heridos leves",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 2",
+      "dato": "Moneda"
+    },
+    {
+      "id": "11",
+      "variable": "2.6",
+      "indicadores": "Costos indirectos de heridos leves",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 0",
+      "dato": "Moneda"
+    },
+    {
+      "id": "12",
+      "variable": "2.7",
+      "indicadores": "Costos directos de choques simples",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 2",
+      "dato": "Moneda"
+    },
+    {
+      "id": "13",
+      "variable": "2.8",
+      "indicadores": "Costos indirectos de choques simples",
+      "fecha": "Enero - Marzo",
+      "valor": "$ 0",
+      "dato": "Moneda"
+    }
+  ],
+  "administrativo": [
+    {
+      "id": "14",
+      "variable": "4.1",
+      "indicadores": "Número total de metas definidas PESV por trimestre",
+      "fecha": "Enero - Marzo",
+      "valor": "13",
+      "dato": "Entero"
+    },
+    {
+      "id": "15",
+      "variable": "4.2",
+      "indicadores": "Número de metas alcanzadas o logradas en el PESV por trimestre",
+      "fecha": "Enero - Marzo",
+      "valor": "13",
+      "dato": "Entero"
+    },
+    {
+      "id": "16",
+      "variable": "5.1",
+      "indicadores": "Actividades programadas a partir del plan anual de trabajo PESV",
+      "fecha": "Enero - Marzo",
+      "valor": "53",
+      "dato": "Entero"
+    },
+    {
+      "id": "17",
+      "variable": "5.2",
+      "indicadores": "Actividades ejecutadas a partir del plan anual de trabajo PESV",
+      "fecha": "Enero - Marzo",
+      "valor": "53",
+      "dato": "Entero"
+    },
+    {
+      "id": "18",
+      "variable": "11.1",
+      "indicadores": "Capacitaciones en seguridad vial programadas",
+      "fecha": "Enero - Marzo",
+      "valor": "7",
+      "dato": "Entero"
+    },
+    {
+      "id": "19",
+      "variable": "11.2",
+      "indicadores": "Capacitaciones en seguridad vial ejecutadas",
+      "fecha": "Enero - Marzo",
+      "valor": "7",
+      "dato": "Entero"
+    },
+    {
+      "id": "20",
+      "variable": "12.1",
+      "indicadores": "Colaboradores capacitados en seguridad vial",
+      "fecha": "Enero - Marzo",
+      "valor": "42",
+      "dato": "Entero"
+    },
+    {
+      "id": "21",
+      "variable": "12.2",
+      "indicadores": "Colaboradores de la organización",
+      "fecha": "Enero - Marzo",
+      "valor": "327",
+      "dato": "Entero"
+    }
+  ],
+  "funcionamiento": [
+    {
+      "id": "22",
+      "variable": "6.1",
+      "indicadores": "Número de excesos en la jornada diaria de trabajo de los conductores por mes (Reuniones y capacitaciones en los que los conductores han superado el tiempo máximo permitido en la legislación)",
+      "fecha": "Marzo",
+      "valor": "044",
+      "dato": "Entero"
+    },
+    {
+      "id": "23",
+      "variable": "6.2",
+      "indicadores": "Total de días trabajados por todos los conductores",
+      "fecha": "Marzo",
+      "valor": "30",
+      "dato": "Entero"
+    },
+    {
+      "id": "24",
+      "variable": "8.1",
+      "indicadores": "Número diario de desplazamientos laborales con exceso de velocidad (casos en los que se superó el límite definido por la organización) por mes",
+      "fecha": "Marzo",
+      "valor": "1877",
+      "dato": "Entero"
+    },
+    {
+      "id": "25",
+      "variable": "8.2",
+      "indicadores": "Número total de desplazamientos laborales por mes",
+      "fecha": "Marzo",
+      "valor": "14467",
+      "dato": "Entero"
+    }
+  ],
+  "vehiculos": [
+    {
+      "id": "26",
+      "variable": "7.1",
+      "indicadores": "Vehículos propios incluidos en el programa de gestión de la velocidad",
+      "fecha": "Marzo",
+      "valor": "0",
+      "dato": "Entero"
+    },
+    {
+      "id": "27",
+      "variable": "7.2",
+      "indicadores": "Número de vehículos propios utilizados para desplazamientos laborales en el mes",
+      "fecha": "Marzo",
+      "valor": "0",
+      "dato": "Entero"
+    },
+    {
+      "id": "28",
+      "variable": "7.3",
+      "indicadores": "Vehículos de contratistas incluidos en el programa de gestión de la velocidad",
+      "fecha": "Marzo",
+      "valor": "142",
+      "dato": "Entero"
+    },
+    {
+      "id": "29",
+      "variable": "7.4",
+      "indicadores": "Número de vehículos de contratistas utilizados para desplazamientos laborales en el mes",
+      "fecha": "Marzo",
+      "valor": "142",
+      "dato": "Entero"
+    },
+    {
+      "id": "30",
+      "variable": "7.5",
+      "indicadores": "Vehículos de terceros incluidos en el programa de gestión de la velocidad",
+      "fecha": "Marzo",
+      "valor": "0",
+      "dato": "Entero"
+    },
+    {
+      "id": "31",
+      "variable": "7.6",
+      "indicadores": "Número de vehículos de terceros utilizados para desplazamientos laborales en el mes",
+      "fecha": "Marzo",
+      "valor": "0",
+      "dato": "Entero"
+    },
+    {
+      "id": "32",
+      "variable": "9.1",
+      "indicadores": "Número de vehículos inspeccionados diariamente",
+      "fecha": "Marzo",
+      "valor": "2890",
+      "dato": "Entero"
+    },
+    {
+      "id": "33",
+      "variable": "9.2",
+      "indicadores": "Número de vehículos que operan diariamente",
+      "fecha": "Marzo",
+      "valor": "3440",
+      "dato": "Entero"
+    },
+    {
+      "id": "34",
+      "variable": "10.1",
+      "indicadores": "Número total de actividades de mantenimiento preventivo programadas por trimestre",
+      "fecha": "Enero - Marzo",
+      "valor": "265",
+      "dato": "Porcentaje"
+    },
+    {
+      "id": "35",
+      "variable": "10.2",
+      "indicadores": "Número de actividades de mantenimiento preventivo ejecutadas por trimestre",
+      "fecha": "Enero - Marzo",
+      "valor": "261",
+      "dato": "Porcentaje"
+    }
+  ]
+}
