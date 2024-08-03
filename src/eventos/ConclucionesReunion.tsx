@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { Button, Modal, Form, Row, Col, Space, Input,message } from 'antd';
-import { DeleteTwoTone, UploadOutlined, CameraOutlined, ReloadOutlined } from '@ant-design/icons';
+import { CameraOutlined, DeleteTwoTone, ReloadOutlined, UploadOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Input, message, Modal, Row, Space } from 'antd';
+import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 
 const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ onDataSubmit }) => {
@@ -9,7 +9,10 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
     wrapperCol: { span: 24 },
   };
 
-  const [concluciones, setConcluciones] = useState<{ imagen: { type: string; src: string }[], conclusion: string }>({
+  const [concluciones, setConcluciones] = useState<{
+    imagen: { type: string; src: string }[];
+    conclusion: string;
+  }>({
     imagen: [],
     conclusion: '',
   });
@@ -20,14 +23,14 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
   const [facingMode, setFacingMode] = useState('user');
 
   const toggleFacingMode = () => {
-    setFacingMode(prevMode => (prevMode === 'user' ? 'environment' : 'user'));
+    setFacingMode((prevMode) => (prevMode === 'user' ? 'environment' : 'user'));
   };
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setConcluciones(prevConcluciones => ({
+    setConcluciones((prevConcluciones) => ({
       ...prevConcluciones,
-      imagen: [...prevConcluciones.imagen, { type: 'captured', src: imageSrc }]
+      imagen: [...prevConcluciones.imagen, { type: 'captured', src: imageSrc }],
     }));
     setModalVisible(false);
   };
@@ -35,16 +38,16 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
   const handleUploadButtonClick = (e: any) => {
     const files = Array.from(e.target.files);
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageSrc = e.target.result as string;
 
-        const imageExists = concluciones.imagen.some(image => image.src === imageSrc);
+        const imageExists = concluciones.imagen.some((image) => image.src === imageSrc);
         if (!imageExists) {
-          setConcluciones(prevConcluciones => ({
+          setConcluciones((prevConcluciones) => ({
             ...prevConcluciones,
-            imagen: [...prevConcluciones.imagen, { type: 'uploaded', src: imageSrc }]
+            imagen: [...prevConcluciones.imagen, { type: 'uploaded', src: imageSrc }],
           }));
         }
       };
@@ -55,12 +58,12 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
   };
 
   const handleDeleteImage = (index: number) => {
-    setConcluciones(prevConcluciones => {
+    setConcluciones((prevConcluciones) => {
       const updatedImages = [...prevConcluciones.imagen];
       updatedImages.splice(index, 1);
       return {
         ...prevConcluciones,
-        imagen: updatedImages
+        imagen: updatedImages,
       };
     });
   };
@@ -69,7 +72,7 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
     message.success('Conclusiones guardadas correctamente');
     const formData = {
       conclusion: values.conclusion,
-      images: concluciones.imagen.filter(img => img.src.trim() !== ''),
+      images: concluciones.imagen.filter((img) => img.src.trim() !== ''),
     };
 
     onDataSubmit(formData);
@@ -78,18 +81,35 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
     form.resetFields();
     setConcluciones({
       imagen: [],
-      conclusion: ''
+      conclusion: '',
     });
   };
 
-  const WhiteDeleteIcon = () => (
-    <DeleteTwoTone twoToneColor="black" />
-  );
+  const WhiteDeleteIcon = () => <DeleteTwoTone twoToneColor="black" />;
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div className='important-border' style={{ maxWidth: 800, width: '100%', padding: '0 16px', border: '1px solid', borderRadius: '20px' }}>
-        <div style={{ fontWeight: 700, fontSize: '1.5rem', marginBottom: '1rem', textAlign: 'center', marginTop: '10px' }}>Fotos y Conclusiones</div>
+      <div
+        className="important-border"
+        style={{
+          maxWidth: 800,
+          width: '100%',
+          padding: '0 16px',
+          border: '1px solid',
+          borderRadius: '20px',
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            marginBottom: '1rem',
+            textAlign: 'center',
+            marginTop: '10px',
+          }}
+        >
+          Fotos y Conclusiones
+        </div>
         <Form
           {...layout}
           name="nest-messages"
@@ -99,37 +119,67 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
           labelAlign="top"
         >
           <Row justify="center" gutter={16} style={{ marginBottom: '1rem' }}>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Fotos"
-                style={{ textAlign: 'center' }}
-              >
+            <Col xs={24} sm={20}>
+              <Form.Item label="Fotos" style={{ textAlign: 'center' }}>
                 <>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '16px' }}>
-                    <Button 
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+                      marginBottom: '16px',
+                    }}
+                  >
+                    <Button
                       icon={<UploadOutlined />}
                       onClick={() => fileInputRef.current.click()}
-                      style={{ width: '44%', margin: '8px' }}
+                      style={{ width: '40%', margin: '8px' }}
                     >
                       Subir Foto
                     </Button>
                     <Button
                       icon={<CameraOutlined />}
                       onClick={() => setModalVisible(true)}
-                      style={{ width: '44%', margin : '8px' }}
+                      style={{ width: '40%', margin: '8px' }}
                     >
                       Tomar Foto
                     </Button>
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {concluciones.imagen.map((image, index) => (
-                      <div key={index} style={{ position: 'relative', margin: '4px', width: '100px', height: '50px' }}>
-                        <img src={image.src} alt={`Foto ${index}`} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} />
+                      <div
+                        key={index}
+                        style={{
+                          position: 'relative',
+                          margin: '4px',
+                          width: '100px',
+                          height: '50px',
+                        }}
+                      >
+                        <img
+                          src={image.src}
+                          alt={`Foto ${index}`}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '5px',
+                          }}
+                        />
                         <Button
                           type="link"
                           icon={<WhiteDeleteIcon />}
                           onClick={() => handleDeleteImage(index)}
-                          style={{ position: 'absolute', top: '1px', right: '1px', backgroundColor: 'white', width: '18px', height: '18px', border: '1px solid black', borderRadius: '6px' }}
+                          style={{
+                            position: 'absolute',
+                            top: '1px',
+                            right: '1px',
+                            backgroundColor: 'white',
+                            width: '18px',
+                            height: '18px',
+                            border: '1px solid black',
+                            borderRadius: '6px',
+                          }}
                         />
                       </div>
                     ))}
@@ -161,7 +211,11 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
                       }}
                       style={{ borderRadius: '10px' }}
                     />
-                    <Button onClick={toggleFacingMode} icon={<ReloadOutlined />} style={{ marginTop: '8px' }}>
+                    <Button
+                      onClick={toggleFacingMode}
+                      icon={<ReloadOutlined />}
+                      style={{ marginTop: '8px' }}
+                    >
                       Cambiar Cámara
                     </Button>
                   </Modal>
@@ -176,7 +230,10 @@ const ConclucionesReunion: React.FC<{ onDataSubmit: (data: any) => void }> = ({ 
                 name="conclusion"
                 rules={[{ required: true, message: 'Por favor ingrese las conclusiones' }]}
               >
-                <Input.TextArea rows={4} placeholder="Escribe las conclusiones de la reunión aquí" />
+                <Input.TextArea
+                  rows={4}
+                  placeholder="Escribe las conclusiones de la reunión aquí"
+                />
               </Form.Item>
             </Col>
           </Row>

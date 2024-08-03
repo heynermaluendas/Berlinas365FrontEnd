@@ -1,5 +1,5 @@
-import React from 'react';
 import { Button } from 'antd';
+import React from 'react';
 import * as XLSX from 'xlsx';
 
 interface ExportToExcelProps {
@@ -32,7 +32,7 @@ const ExportToExcel: React.FC<ExportToExcelProps> = ({ data, fileName, baseURL }
   };
 
   return (
-    <Button type='primary' onClick={handleExport}>
+    <Button type="primary" onClick={handleExport}>
       Exportar a Excel
     </Button>
   );

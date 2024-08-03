@@ -175,7 +175,7 @@
     {
       "id": "22",
       "variable": "6.1",
-      "indicadores": "Número de excesos en la jornada diaria de trabajo de los conductores por mes (Reuniones y capacitaciones en los que los conductores han superado el tiempo máximo permitido en la legislación)",
+      "indicadores": "Número de excesos en la jornada diaria de trabajo de los conductores por mes (eventos en los que los conductores han superado el tiempo máximo permitido en la legislación)",
       "fecha": "Marzo",
       "valor": "044",
       "dato": "Entero"

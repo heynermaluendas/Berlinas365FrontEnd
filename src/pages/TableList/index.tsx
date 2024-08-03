@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import ExportToExcel from '@/eventos/ExportToExcel';
 import { PageContainer } from '@ant-design/pro-components';
 import { Input } from 'antd';
-import { Tabla } from '../componentesPropios/TablaSisi';
-import ExportToExcel from './ExportToExcel';
+import { useEffect, useState } from 'react';
+import { Tabla } from '../../eventos/TablaSisi';
+
+// Importa el archivo JSON local
+import dataJson from './db.json'; // Asegúrate de que la ruta sea correcta
 
 const tabList = [
   {
@@ -25,76 +28,57 @@ const tabList = [
 
 const Search = () => {
   const [activeTabKey, setActiveTabKey] = useState('siniestro');
-  const [searchValue, setSearchValue] = useState('');
-  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
+  const [data, setData] = useState({
+    siniestro: [],
+    administrativo: [],
+    funcionamiento: [],
+    vehiculos: [],
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const urls = [
-          'http://localhost:3001/siniestro',
-          'http://localhost:3001/administrativo',
-          'http://localhost:3001/funcionamiento',
-          'http://localhost:3001/vehiculos'
-        ];
-
-        const responses = await Promise.all(urls.map(url => fetch(url)));
-        const jsonResponses = await Promise.all(responses.map(response => response.json()));
-        const combinedData = jsonResponses.reduce((acc, data) => [...acc, ...data], []);
-
-        setUsers(combinedData);
-      } catch (error) {
-        console.error('Error al cargar datos:', error);
-      }
-    };
-
-    fetchData();
+    const { siniestro, administrativo, funcionamiento, vehiculos } = dataJson;
+    setData({
+      siniestro,
+      administrativo,
+      funcionamiento,
+      vehiculos,
+    });
   }, []);
 
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
 
-  const filteredUsers = users.filter(user =>
-    user.indicadores.toLowerCase().includes(search)
-  );
+  const filteredData = (category) =>
+    data[category].filter((item) => item.indicadores.toLowerCase().includes(search));
 
   const handleTabChange = (key) => {
     setActiveTabKey(key);
   };
 
   const renderContent = () => {
-    switch (activeTabKey) {
-      case 'siniestro':
-        return <Tabla searchQuery={search} baseURL="http://localhost:3001/siniestro" />;
-      case 'administrativo':
-        return <Tabla searchQuery={search} baseURL="http://localhost:3001/administrativo" />;
-      case 'funcionamiento':
-        return <Tabla searchQuery={search} baseURL="http://localhost:3001/funcionamiento" />;
-      case 'vehiculos':
-        return <Tabla searchQuery={search} baseURL="http://localhost:3001/vehiculos" />;
-      default:
-        return null;
-    }
+    const filteredCategoryData = filteredData(activeTabKey);
+    return <Tabla data={filteredCategoryData} />;
   };
-   
-  
 
   return (
     <PageContainer
       content={
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', userSelect: 'none', padding: '0 20px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            userSelect: 'none',
+            padding: '0 20px',
+          }}
+        >
           <div style={{ flex: 1, textAlign: 'left' }}>
-            <Input.Search
-              value={search}
-              onChange={handleSearch}
-              type="text"
-              placeholder="Buscar"
-            />
+            <Input.Search value={search} onChange={handleSearch} type="text" placeholder="Buscar" />
           </div>
           <div style={{ marginLeft: 20 }}>
-            <ExportToExcel data={filteredUsers} fileName="datos_exportados" />
+            <ExportToExcel data={filteredData(activeTabKey)} fileName="datos_exportados" />
           </div>
         </div>
       }
@@ -109,5 +93,3 @@ const Search = () => {
 };
 
 export default Search;
-
- 

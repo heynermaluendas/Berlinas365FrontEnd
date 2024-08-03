@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
-import CrearReunion from './componentesPropios/CrearReunion';
-import { Cuestionario } from './componentesPropios/cuestionario';
-import ConclucionesReunion from './componentesPropios/ConclucionesReunion';
-import { Steps, Button, message, Form } from 'antd';
+import { Button, Form, message, Steps } from 'antd';
 import axios from 'axios';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ConclucionesReunion from '../eventos/ConclucionesReunion';
+import CrearReunion from '../eventos/CrearReunion';
+import { Cuestionario } from '../eventos/cuestionario';
 
 const { Step } = Steps;
 
@@ -12,17 +13,18 @@ const Welcome: React.FC = () => {
   const [formData, setFormData] = useState<any>({ cuestionarios: [] });
   const [form] = Form.useForm();
   const conclucionesRef = useRef<any>(null);
+  const navigate = useNavigate(); // Hook para redireccionar
 
   const handleSaveStepData = (data: any, stepName: string) => {
     if (stepName === 'cuestionario') {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
-        cuestionarios: [...prevData.cuestionarios, data]
+        cuestionarios: [...prevData.cuestionarios, data],
       }));
     } else {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
-        [stepName]: data
+        [stepName]: data,
       }));
     }
   };
@@ -35,6 +37,9 @@ const Welcome: React.FC = () => {
 
       await axios.post('http://localhost:3003/formulario', formData);
       message.success('Datos enviados correctamente');
+
+      // Redirigir a la página de "Revisar"
+      navigate('/revisar');
     } catch (error) {
       console.error('Error al guardar los datos:', error);
       message.error('Error al guardar los datos');
@@ -44,15 +49,30 @@ const Welcome: React.FC = () => {
   const steps = [
     {
       title: 'Nueva reunion',
-      content: <CrearReunion onSave={(data: any) => handleSaveStepData(data, 'crearReunion')} form={form} />,
+      content: (
+        <CrearReunion
+          onSave={(data: any) => handleSaveStepData(data, 'crearReunion')}
+          form={form}
+        />
+      ),
     },
     {
       title: 'Registro de asistencia',
-      content: <Cuestionario onSave={(data: any) => handleSaveStepData(data, 'cuestionario')} />,
+      content: (
+        <Cuestionario
+          stopCapture={setStopCapture}
+          onSave={(data: any) => handleSaveStepData(data, 'cuestionario')}
+        />
+      ),
     },
     {
       title: 'Conclusiones',
-      content: <ConclucionesReunion onDataSubmit={(data: any) => handleSaveStepData(data, 'conclusiones')} ref={conclucionesRef} />,
+      content: (
+        <ConclucionesReunion
+          onDataSubmit={(data: any) => handleSaveStepData(data, 'conclusiones')}
+          ref={conclucionesRef}
+        />
+      ),
     },
   ];
 
@@ -61,7 +81,7 @@ const Welcome: React.FC = () => {
       await form.validateFields();
       const formValues = form.getFieldsValue();
       handleSaveStepData(formValues, steps[currentStep].title.toLowerCase().replace(' ', ''));
-      setCurrentStep(prevStep => prevStep + 1);
+      setCurrentStep((prevStep) => prevStep + 1);
       form.resetFields();
     } catch (error) {
       console.error('Error en la validación:', error);
@@ -69,12 +89,12 @@ const Welcome: React.FC = () => {
   };
 
   const prev = () => {
-    setCurrentStep(prevStep => prevStep - 1);
+    setCurrentStep((prevStep) => prevStep - 1);
   };
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <Steps progressDot  current={currentStep}>
+      <Steps progressDot current={currentStep}>
         {steps.map((step, index) => (
           <Step key={index} title={step.title} />
         ))}

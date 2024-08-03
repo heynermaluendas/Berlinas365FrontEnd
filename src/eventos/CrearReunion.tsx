@@ -1,6 +1,6 @@
-import React from 'react';
-import { Form, Input, DatePicker, TimePicker, Button, Space, Row, Col } from 'antd';
+import { Col, DatePicker, Form, Input, Row, TimePicker } from 'antd';
 import moment from 'moment';
+import React from 'react';
 
 interface CrearReunionProps {
   initialValues?: {
@@ -27,8 +27,27 @@ const CrearReunion: React.FC<CrearReunionProps> = ({ initialValues = {}, onSave,
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div className='important-border' style={{ maxWidth: 800, width: '100%', padding: '0 16px', border: '1px solid', borderRadius: '20px' }}>
-        <div style={{ fontWeight: 700, fontSize: '1.5rem', marginBottom: '1rem', textAlign: 'center', marginTop: '10px' }}>Crear reunión</div>
+      <div
+        className="important-border"
+        style={{
+          maxWidth: 800,
+          width: '100%',
+          padding: '0 16px',
+          border: '1px solid',
+          borderRadius: '20px',
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            marginBottom: '1rem',
+            textAlign: 'center',
+            marginTop: '10px',
+          }}
+        >
+          Crear reunión
+        </div>
         <Form
           {...layout}
           form={form}
@@ -97,7 +116,6 @@ const CrearReunion: React.FC<CrearReunionProps> = ({ initialValues = {}, onSave,
               </Form.Item>
             </Col>
           </Row>
- 
         </Form>
       </div>
     </div>

@@ -1,39 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button } from 'antd';
 import html2pdf from 'html2pdf.js';
+import React, { useEffect } from 'react';
 
-const GenerateAllPDFs = () => {
-  const [formData, setFormData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
+const GenerarPDF: React.FC<{ id: string }> = ({ id }) => {
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAndGeneratePDF = async () => {
       try {
-        const response = await axios.get('http://localhost:3003/formulario');
-        console.log('Datos obtenidos:', response.data);
-        if (response.data && Array.isArray(response.data)) {
-          setFormData(response.data);
-        } else {
-          console.error('Estructura de datos inválida:', response.data);
-        }
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        const response = await axios.get(`http://localhost:3003/formulario/${id}`);
+        const data = response.data;
 
-    fetchData();
-  }, []);
-
-  const generatePDF = (data: any, index: number) => {
-    console.log('Generando PDF para:', data);
-
-    // Crear un elemento de HTML para el PDF
-    const element = document.createElement('div');
-    element.innerHTML = `
-      <style>
+        const element = document.createElement('div');
+        element.innerHTML = `
+          <style>
         body {
           font-family: 'Arial', sans-serif;
           color: black;
@@ -276,11 +254,25 @@ align-items: center;
         <div class="section ">
           <h2>Detalles de la Reunión</h2>
           <table class="details-table">
-  <tr><th class="left-column centered">Nombre</th><td class="right-column">${data.nuevareunion?.nombre || 'Nombre no disponible'}</td></tr>
-  <tr><th class="left-column">Fecha</th><td class="right-column">${data.nuevareunion?.fecha ? new Date(data.nuevareunion.fecha).toLocaleDateString() : 'Fecha no disponible'}</td></tr>
-  <tr><th class="left-column">Hora</th><td class="right-column">${data.nuevareunion?.hora ? new Date(data.nuevareunion.hora).toLocaleTimeString() : 'Hora no disponible'}</td></tr>
-  <tr><th class="left-column">Lugar</th><td class="right-column">${data.nuevareunion?.lugar || 'Lugar no disponible'}</td></tr>
-  <tr><th class="left-column">Tema</th><td class="right-column">${data.nuevareunion?.tema || 'Tema no disponible'}</td></tr>
+  <tr><th class="left-column centered">Nombre</th><td class="right-column">${
+    data.nuevareunion?.nombre || 'Nombre no disponible'
+  }</td></tr>
+  <tr><th class="left-column">Fecha</th><td class="right-column">${
+    data.nuevareunion?.fecha
+      ? new Date(data.nuevareunion.fecha).toLocaleDateString()
+      : 'Fecha no disponible'
+  }</td></tr>
+  <tr><th class="left-column">Hora</th><td class="right-column">${
+    data.nuevareunion?.hora
+      ? new Date(data.nuevareunion.hora).toLocaleTimeString()
+      : 'Hora no disponible'
+  }</td></tr>
+  <tr><th class="left-column">Lugar</th><td class="right-column">${
+    data.nuevareunion?.lugar || 'Lugar no disponible'
+  }</td></tr>
+  <tr><th class="left-column">Tema</th><td class="right-column">${
+    data.nuevareunion?.tema || 'Tema no disponible'
+  }</td></tr>
 </table>
         </div>
       <div class="section2  ">
@@ -295,18 +287,31 @@ align-items: center;
       </tr>
     </thead>
     <tbody>
-      ${data.cuestionarios?.map((cuestionario: any) => `
+      ${
+        data.cuestionarios
+          ?.map(
+            (cuestionario: any) => `
         <tr>
           <td>${cuestionario.user?.name || 'Nombre no disponible'}</td>
           <td>${cuestionario.user?.email || 'Email no disponible'}</td>
           <td class="centered">${cuestionario.user?.age || 'Edad no disponible'}</td>
           <td>
-            ${cuestionario.images?.filter((image: any) => image.type === 'signature').map((image: any) => `
+            ${
+              cuestionario.images
+                ?.filter((image: any) => image.type === 'signature')
+                .map(
+                  (image: any) => `
               <img class="img-signature" src="${image.src}" alt="Firma" />
-            `).join('') || 'No hay firmas'}
+            `,
+                )
+                .join('') || 'No hay firmas'
+            }
           </td>
         </tr>
-      `).join('') || '<tr><td colspan="4">No hay cuestionarios</td></tr>'}
+      `,
+          )
+          .join('') || '<tr><td colspan="4">No hay cuestionarios</td></tr>'
+      }
     </tbody>
   </table>
 </div>
@@ -321,7 +326,9 @@ align-items: center;
     </thead>
     <tbody>
         <tr>
-         <td class="formatted-text">${data.conclusiones?.conclusion || 'Conclusión no disponible'}</td>
+         <td class="formatted-text">${
+           data.conclusiones?.conclusion || 'Conclusión no disponible'
+         }</td>
         </tr>
     </tbody>
   </table>
@@ -337,9 +344,15 @@ align-items: center;
           
         
         <td>
-        ${data.conclusiones?.images?.map((image) => `
+        ${
+          data.conclusiones?.images
+            ?.map(
+              (image) => `
           <img class="img-normali" src="${image.src}" alt="Imagen" />
-          `).join('') || 'No hay imágenes de conclusiones'}
+          `,
+            )
+            .join('') || 'No hay imágenes de conclusiones'
+        }
           </td>
         
           </tr>
@@ -350,35 +363,18 @@ align-items: center;
           <p>Generado por Berlinas del fonce S.A.S</p>
         </div>
       </div>
-    `;
+        `;
 
-    html2pdf().from(element).save(`formulario_${index}.pdf`);
-  };
+        html2pdf().from(element).save(`reunion_${id}.pdf`);
+      } catch (error) {
+        console.error('Error generating PDF:', error);
+      }
+    };
 
-  const generateAllPDFs = () => {
-    console.log('Datos para generar PDFs:', formData);
+    fetchAndGeneratePDF();
+  }, [id]);
 
-    if (!Array.isArray(formData) || formData.length === 0) {
-      console.error('No hay datos válidos para generar PDFs.');
-      return;
-    }
-
-    formData.forEach((data, index) => {
-      generatePDF(data, index);
-    });
-  };
-
-  if (loading) return <p>Cargando...</p>;
-
-  return (
-    <div>
-       
-      <Button type='primary' onClick={generateAllPDFs}>
-     PDF
-      </Button>
-
-    </div>
-  );
+  return <div>Generando PDF...</div>;
 };
 
-export default GenerateAllPDFs;
+export default GenerarPDF;
