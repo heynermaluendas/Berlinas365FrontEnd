@@ -4,12 +4,12 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConclucionesReunion from '../eventos/ConclucionesReunion';
 import CrearReunion from '../eventos/CrearReunion';
-import { Cuestionario } from '../eventos/cuestionario';
 
 const { Step } = Steps;
 
 const Welcome: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
+  // const [stopCapture, setStopCapture] = useState<number>(0);
   const [formData, setFormData] = useState<any>({ cuestionarios: [] });
   const [form] = Form.useForm();
   const conclucionesRef = useRef<any>(null);
@@ -56,15 +56,15 @@ const Welcome: React.FC = () => {
         />
       ),
     },
-    {
-      title: 'Registro de asistencia',
-      content: (
-        <Cuestionario
-          stopCapture={setStopCapture}
-          onSave={(data: any) => handleSaveStepData(data, 'cuestionario')}
-        />
-      ),
-    },
+    // {
+    //   title: 'Registro de asistencia',
+    //   content: (
+    //     <Cuestionario
+    //       stopCapture={setStopCapture}
+    //       onSave={(data: any) => handleSaveStepData(data, 'cuestionario')}
+    //     />
+    //   ),
+    // },
     {
       title: 'Conclusiones',
       content: (

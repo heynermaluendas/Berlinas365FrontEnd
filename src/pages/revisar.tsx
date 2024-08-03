@@ -1,4 +1,4 @@
-import CaptureHuella from '@/eventos/Huella';
+import TablasPDF from '@/eventos/tablasPDF';
 import { PageContainer } from '@ant-design/pro-components';
 import { Input } from 'antd';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ const Revisar: React.FC = () => {
     setSearch(e.target.value.toLowerCase());
   };
 
-  const renderContent = () => <CaptureHuella />;
+  const renderContent = () => <TablasPDF />;
 
   return (
     <PageContainer
