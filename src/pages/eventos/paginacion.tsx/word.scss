@@ -1,0 +1,23 @@
+/* Selecciona todas las celdas de la tabla para ajustar el padding y el borde */
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-cell,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody > tr > td,
+.ant-table-wrapper .ant-table.ant-table-small tfoot > tr > th,
+.ant-table-wrapper .ant-table.ant-table-small tfoot > tr > td {
+    padding: 0 !important; /* Elimina el padding */
+    margin: 0 !important; /* Elimina el margen */
+    border: none !important; /* Elimina el borde */
+}
+
+/* Elimina el borde entre las celdas */
+.ant-table-wrapper .ant-table.ant-table-small {
+    border-collapse: collapse; /* Asegura que no haya espacio entre celdas */
+}
+
+/* Asegura que el tamaño de las celdas sea de 10x10 px */
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-cell,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody > tr > td {
+    width: 10px; /* Ancho de 10px */
+    height: 10px; /* Altura de 10px */
+}
